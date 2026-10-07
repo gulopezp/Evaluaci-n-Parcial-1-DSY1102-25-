@@ -1,4 +1,4 @@
-public class Vivienda {
+public abstract class Vivienda {
 
     private String codigoPropiedad;
     private double superficieM2;
@@ -44,6 +44,21 @@ public class Vivienda {
         }
 
         this.numeroHabitaciones = numeroHabitaciones;
+    }
+
+    public abstract double calcularCostoArriendo();
+
+    public double calcularCostoArriendo(double porcentajeDescuento) {
+
+        if (porcentajeDescuento < 0 || porcentajeDescuento > 100) {
+            throw new IllegalArgumentException(
+                    "El porcentaje de descuento debe estar entre 0 y 100."
+            );
+        }
+
+        double costo = calcularCostoArriendo();
+
+        return costo - (costo * porcentajeDescuento / 100);
     }
 
     @Override
