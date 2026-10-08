@@ -1,16 +1,13 @@
 public class Main {
-
     public static void main(String[] args) {
-
         try {
-
+            GestorViviendas gestor = new GestorViviendas();
             Casa casa1 = new Casa(
                     "CASA001",
                     120.0,
                     4,
                     true
             );
-
             Departamento departamento1 = new Departamento(
                     "DEP001",
                     75.0,
@@ -18,32 +15,19 @@ public class Main {
                     5,
                     false
             );
-
-            System.out.println("Casa creada correctamente:");
-            System.out.println(casa1);
-            System.out.println("Costo arriendo: $" + casa1.calcularCostoArriendo());
-
+            gestor.registrarVivienda(casa1);
+            gestor.registrarVivienda(departamento1);
             System.out.println();
-
-            System.out.println("Departamento creado correctamente:");
-            System.out.println(departamento1);
-            System.out.println("Costo arriendo: $" + departamento1.calcularCostoArriendo());
-
-            System.out.println();
-
-            System.out.println("Costo Casa con 10% de descuento:");
-            System.out.println("$" + casa1.calcularCostoArriendo(10));
-
-            System.out.println();
-
-            System.out.println("Estacionamiento Departamento:");
-            System.out.println(departamento1.tieneEstacionamientoAsignado());
-
-            departamento1.asignarEstacionamiento();
-
-            System.out.println("Estacionamiento asignado:");
-            System.out.println(departamento1.tieneEstacionamientoAsignado());
-
+            System.out.println("Listado de viviendas:");
+            for (Vivienda vivienda : gestor.obtenerViviendas()) {
+                System.out.println(vivienda);
+                System.out.println("Costo arriendo: $" + vivienda.calcularCostoArriendo());
+                System.out.println();
+            }
+            System.out.println("Busqueda por codigo CASA001:");
+            for (Vivienda vivienda : gestor.buscarPorCodigo("CASA001")) {
+                System.out.println(vivienda);
+            }
         } catch (IllegalArgumentException e) {
             System.out.println("Error: " + e.getMessage());
         }
